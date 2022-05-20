@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android" id="cordova_plugin_Nova_copilot" version="0.0.1">
+    <name>Nova_copilot</name>
+    <js-module name="Nova_copilot" src="www/Nova_copilot.js">
+        <clobbers target="cordova.plugins.Nova_copilot" />
+    </js-module>
+    <platform name="android">
+        <config-file parent="/*" target="res/xml/config.xml">
+            <feature name="Nova_copilot">
+                <param name="android-package" value="cordova_plugin_Nova_copilot.Nova_copilot" />
+            </feature>
+        </config-file>
+        <config-file parent="/*" target="AndroidManifest.xml" />
+        <source-file src="src/android/Nova_copilot.java" target-dir="src/cordova_plugin_Nova_copilot/Nova_copilot" />
+        <source-file src="src/android/ZendriveSdkBroadcastReceiver.java" target-dir="src/cordova_plugin_Nova_copilot/Nova_copilot" />
+        <source-file src="src/android/ZendriveSdkNotificationProvider.java" target-dir="src/cordova_plugin_Nova_copilot/Nova_copilot" />
+        <source-file src="src/android/Constants.java" target-dir="src/cordova_plugin_Nova_copilot/Nova_copilot" />
+        <source-file src="src/android/NotificationUtility.java" target-dir="src/cordova_plugin_Nova_copilot/Nova_copilot" />
+        <source-file src="src/android/CollisionDetectedActivity.java" target-dir="src/cordova_plugin_Nova_copilot/Nova_copilot" />
+        <source-file src="src/android/SplashActivity.java" target-dir="src/cordova_plugin_Nova_copilot/Nova_copilot" />
+        <source-file src="src/android/SharedPreferenceManager.java" target-dir="src/cordova_plugin_Nova_copilot/Nova_copilot" />
+
+
+    </platform>
+
+    <framework src="src/build.gradle" custom="true" type="gradleReference" />
+</plugin>
+
