@@ -43,5 +43,5 @@ repositories {
 
 dependencies {
     implementation "com.zendrive.sdk.android:ZendriveSDK:8.2.0"
-    compile 'com.google.code.findbugs:jsr305:1.3.9'
+    implementation "com.google.code.findbugs:jsr305:1.3.9"
 }
