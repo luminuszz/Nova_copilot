@@ -2,22 +2,33 @@ var exec = require('cordova/exec');
 
 var PLUGIN_ID = "Nova_copilot";
 
+function Nova_copilot() {
+}
 
-var Nova_copilot =  {}
 
-
-Nova_copilot.coolMethod = function (arg0, success, error) {
+Nova_copilot.prototype.coolMethod = function (arg0, success, error) {
     exec(success, error, PLUGIN_ID, 'coolMethod', [arg0]);
 }
 
-Nova_copilot.isSDKSetup = function (arg0, success, error) {
+Nova_copilot.prototype.isSDKSetup = function (arg0, success, error) {
     exec(success, error, PLUGIN_ID, 'isSDKSetup', [arg0]);
 }
 
-Nova_copilot.setUp = function (arg0, success, error) {
+Nova_copilot.prototype.setUp = function (arg0, success, error) {
     exec(success, error, PLUGIN_ID, 'setUp', [arg0]);
 }
 
 
 
-module.exports = Nova_copilot
+Nova_copilot.install = function () {
+  if (!window.plugins) {
+    window.plugins = {};
+  }
+
+  window.plugins.Nova_copilot = new Nova_copilot();
+    
+  return window.plugins.Nova_copilot;
+};
+    
+cordova.addConstructor(Nova_copilot.install);
+
