@@ -13,9 +13,9 @@ import com.zendrive.sdk.*;
 
 public class Nova_copilot extends CordovaPlugin {
 
-    static final String ZENDRIVE_SDK_KEY = "1moSkgjnEDSQbqjTaA5VyJRd6SWbvdX0";
+  //  static final String ZENDRIVE_SDK_KEY = "1moSkgjnEDSQbqjTaA5VyJRd6SWbvdX0";
 
-    static  final String driver_id = "vkBoeu93reee4GRP7FygfFu10Oy2";
+  //  static  final String driver_id = "vkBoeu93reee4GRP7FygfFu10Oy2";
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
@@ -33,7 +33,10 @@ public class Nova_copilot extends CordovaPlugin {
         }
 
         if (action.equals("setUp")) {
-            this.setUp(callbackContext);
+            String sdkKey = args.getString(0);
+            String driver_id = args.getString(1);
+
+            this.setUp(sdkKey, driver_id, callbackContext);
             return true;
         }
 
@@ -41,6 +44,12 @@ public class Nova_copilot extends CordovaPlugin {
         if(action.equals("startManualDrive")){
             this.startManualDrive(callbackContext);
             return true;
+        }
+
+
+        if(action.equals("stopManualDrive")){
+             this.stopManualDrive(callbackContext);
+             return true;
         }
 
 
@@ -68,7 +77,7 @@ public class Nova_copilot extends CordovaPlugin {
     }
 
 
-    public void setUp(final CallbackContext callbackContext){
+    public void setUp(String ZENDRIVE_SDK_KEY, String driver_id, final CallbackContext callbackContext){
         Context context = this.cordova.getActivity().getApplicationContext();
 
         ZendriveConfiguration zendriveConfiguration = new ZendriveConfiguration(ZENDRIVE_SDK_KEY, driver_id);
@@ -109,6 +118,31 @@ public class Nova_copilot extends CordovaPlugin {
                 }
             }
         );
+
+    }
+
+
+    public void stopManualDrive(final CallbackContext callbackContext) {
+      Context context = this.cordova.getActivity().getApplicationContext();
+
+      Zendrive.stopManualDrive(context,
+          new ZendriveOperationCallback() {
+              @Override
+              public void onCompletion(ZendriveOperationResult result) {
+                  if (result.isSuccess()) {
+
+                    callbackContext.success("stopManualDrive success");
+
+                    }
+                  else {
+                   callbackContext.success("stopManualDrive error");
+
+                   }
+              }
+          }
+      );
+
+
 
     }
 
