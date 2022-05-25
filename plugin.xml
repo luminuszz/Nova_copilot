@@ -5,12 +5,26 @@
         <clobbers target="cordova.plugins.Nova_copilot" />
     </js-module>
     <platform name="android">
+        <receiver android:name=".ZendriveSdkBroadcastReceiver" />
+
         <config-file parent="/*" target="res/xml/config.xml">
             <feature name="Nova_copilot">
                 <param name="android-package" value="cordova_plugin_Nova_copilot.Nova_copilot" />
             </feature>
         </config-file>
-        <config-file parent="/*" target="AndroidManifest.xml" />
+        <config-file parent="/*" target="AndroidManifest.xml" >
+            <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+            <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+            <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+            <uses-permission android:name="android.permission.INTERNET" />
+            <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+            <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+            <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+            <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+            <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+            <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+        </config-file>
         <source-file src="src/android/Nova_copilot.java" target-dir="src/cordova_plugin_Nova_copilot/Nova_copilot" />
         <source-file src="src/android/ZendriveSdkBroadcastReceiver.java" target-dir="src/cordova_plugin_Nova_copilot/Nova_copilot" />
         <source-file src="src/android/ZendriveSdkNotificationProvider.java" target-dir="src/cordova_plugin_Nova_copilot/Nova_copilot" />

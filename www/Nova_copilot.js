@@ -18,6 +18,11 @@ Nova_copilot.prototype.setUp = function (arg0, success, error) {
     exec(success, error, PLUGIN_ID, 'setUp', [arg0]);
 }
 
+Nova_copilot.prototype.startManualDrive = function (arg0, success, error) {
+    exec(success, error, PLUGIN_ID, 'startManualDrive', [arg0]);
+}
+
+
 
 
 Nova_copilot.install = function () {

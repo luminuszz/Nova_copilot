@@ -6,13 +6,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
+
 import com.zendrive.sdk.ZendriveNotificationContainer;
 import com.zendrive.sdk.ZendriveNotificationProvider;
 
-/**
- * Used to provide the Zendrive SDK with notifications that are triggered
- * when the SDK goes into foreground mode.
- */
+
 public class ZendriveSdkNotificationProvider implements ZendriveNotificationProvider {
 
     @Nullable
@@ -33,8 +31,9 @@ public class ZendriveSdkNotificationProvider implements ZendriveNotificationProv
     @NonNull
     @Override
     public ZendriveNotificationContainer getInDriveNotificationContainer(@NonNull Context context) {
-        return new ZendriveNotificationContainer(
-                NotificationUtility.FOREGROUND_MODE_NOTIFICATION_ID,
-                NotificationUtility.createInDriveNotification(context));
+      return new ZendriveNotificationContainer(
+                  NotificationUtility.FOREGROUND_MODE_NOTIFICATION_ID,
+                  NotificationUtility.createInDriveNotification(context)
+                             );
     }
 }

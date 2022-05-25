@@ -38,6 +38,12 @@ public class Nova_copilot extends CordovaPlugin {
         }
 
 
+        if(action.equals("startManualDrive")){
+            this.startManualDrive(callbackContext);
+            return true;
+        }
+
+
 
         return false;
     }
@@ -69,8 +75,8 @@ public class Nova_copilot extends CordovaPlugin {
         Zendrive.setup(
                 context,
                 zendriveConfiguration,
-                ZendriveBroadcastReceiver.class,
-                ZendriveNotificationProvider.class,
+                 ZendriveSdkBroadcastReceiver.class,
+                 ZendriveSdkNotificationProvider.class,
                 new ZendriveOperationCallback() {
                     @Override
                     public void onCompletion(ZendriveOperationResult result) {
@@ -83,6 +89,27 @@ public class Nova_copilot extends CordovaPlugin {
                     }
                 }
         );
+    }
+
+
+    public void startManualDrive(final CallbackContext callbackContext) {
+       Context context = this.cordova.getActivity().getApplicationContext();
+
+        Zendrive.startDrive(context, Constants.TRIP_TRACKING_ID,
+            new ZendriveOperationCallback() {
+                @Override
+                public void onCompletion(ZendriveOperationResult result) {
+                    if (result.isSuccess()) {
+                      callbackContext.success("startDrive success");
+
+                     }
+                    else {
+                     callbackContext.error("startDrive error");
+                     }
+                }
+            }
+        );
+
     }
 
 }
