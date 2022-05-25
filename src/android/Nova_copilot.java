@@ -13,9 +13,6 @@ import com.zendrive.sdk.*;
 
 public class Nova_copilot extends CordovaPlugin {
 
-  //  static final String ZENDRIVE_SDK_KEY = "1moSkgjnEDSQbqjTaA5VyJRd6SWbvdX0";
-
-  //  static  final String driver_id = "vkBoeu93reee4GRP7FygfFu10Oy2";
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
