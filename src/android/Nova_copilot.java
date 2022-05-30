@@ -2,6 +2,13 @@ package cordova_plugin_Nova_copilot;
 
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import org.apache.cordova.PluginResult;
+import android.util.Log;
+import android.content.Intent;
+import android.content.IntentFilter;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -13,9 +20,19 @@ import com.zendrive.sdk.*;
 
 public class Nova_copilot extends CordovaPlugin {
 
+    private boolean listenEvent = false;
+
+    private CallbackContext zendriveCallbackContext = null;
+
+    private BroadcastReceiver receiver;
+
+
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
+
+     this.zendriveCallbackContext = callbackContext;
+
 
         if (action.equals("coolMethod")) {
             String message = args.getString(0);
@@ -49,6 +66,11 @@ public class Nova_copilot extends CordovaPlugin {
              return true;
         }
 
+        if(action.equals("ListenDriveEvents")){
+            this.ListenDriveEvents(callbackContext);
+
+            return true;
+        }
 
 
         return false;
@@ -78,23 +100,23 @@ public class Nova_copilot extends CordovaPlugin {
         Context context = this.cordova.getActivity().getApplicationContext();
 
         ZendriveConfiguration zendriveConfiguration = new ZendriveConfiguration(ZENDRIVE_SDK_KEY, driver_id);
-        Zendrive.setup(
-                context,
-                zendriveConfiguration,
-                 ZendriveSdkBroadcastReceiver.class,
-                 ZendriveSdkNotificationProvider.class,
-                new ZendriveOperationCallback() {
-                    @Override
-                    public void onCompletion(ZendriveOperationResult result) {
-                        if (result.isSuccess()) {
-                            callbackContext.success("zendrive is running...!");
+                            Zendrive.setup(
+                                    context,
+                                    zendriveConfiguration,
+                                     ZendriveSdkBroadcastReceiver.class,
+                                     ZendriveSdkNotificationProvider.class,
+                                    new ZendriveOperationCallback() {
+                                        @Override
+                                        public void onCompletion(ZendriveOperationResult result) {
+                                            if (result.isSuccess()) {
+                                                callbackContext.success("zendrive is running...!");
 
-                        }else {
-                            callbackContext.error("zendrive is not running...!");
-                        }
-                    }
-                }
-        );
+                                            }else {
+                                                callbackContext.error("zendrive is not running...!");
+                                            }
+                                        }
+                                    }
+                            );
     }
 
 
@@ -139,8 +161,70 @@ public class Nova_copilot extends CordovaPlugin {
           }
       );
 
-
-
     }
 
+
+
+
+public void ListenDriveEvents(CallbackContext callbackContext) {
+      cordova.getActivity().runOnUiThread(new Runnable() {
+                  public void run() {
+                      if(receiver == null) {
+                               receiver = new BroadcastReceiver() {
+                                          @Override
+                                          public void onReceive(Context context, Intent intent) {
+                                              String action = intent.getAction();
+
+                                               String message = intent.getStringExtra("event");
+
+                                               PluginResult result = new PluginResult(PluginResult.Status.OK, message);
+                                               result.setKeepCallback(true);
+                                               callbackContext.sendPluginResult(result);
+
+                                               webView.postMessage("driver_events", message);
+                                          }
+
+                                      };
+                              }
+
+                               IntentFilter filter = new IntentFilter();
+
+                               filter.addAction("cordova_plugin_Nova_copilot.EVENT_CHANNEL");
+
+                               webView.getContext().registerReceiver(receiver, filter);
+
+
+                               Log.d("PluginResult", "Receiver registered");
+
+                  }
+              });
+
+
+
 }
+
+
+public static void notify(Context context, String eventName) {
+    Intent intent = new Intent("cordova_plugin_Nova_copilot.EVENT_CHANNEL");
+    intent.putExtra("event", eventName);
+    context.sendBroadcast(intent);
+
+
+      Log.d("Notify driver Event", eventName);
+}
+
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+

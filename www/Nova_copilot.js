@@ -25,6 +25,11 @@ Nova_copilot.prototype.startManualDrive = function (arg0, success, error) {
 Nova_copilot.prototype.stopManualDrive = function (arg0, success, error) {
     exec(success, error, PLUGIN_ID, 'stopManualDrive', [arg0]);
 }
+Nova_copilot.prototype.ListenDriveEvents = function (success, error) {
+    exec(success, error, PLUGIN_ID, 'ListenDriveEvents', []);
+}
+
+
 
 
 
@@ -34,10 +39,14 @@ Nova_copilot.prototype.stopManualDrive = function (arg0, success, error) {
 Nova_copilot.install = function () {
   if (!window.plugins) {
     window.plugins = {};
+
   }
+  cordova.fireDocumentEvent("driver_events")
+
 
   window.plugins.Nova_copilot = new Nova_copilot();
-    
+
+
   return window.plugins.Nova_copilot;
 };
     

@@ -4,11 +4,21 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="136345b8-00b0-480a-821a-a780683d332e" name="Changes" comment="" />
+    <list default="true" id="136345b8-00b0-480a-821a-a780683d332e" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/android/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/android/Constants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/android/Nova_copilot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/android/Nova_copilot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/android/ZendriveSdkBroadcastReceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/android/ZendriveSdkBroadcastReceiver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/src/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/Nova_copilot.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/Nova_copilot.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="29P9DLMmspEu3MR5d0cKgt52em5" />
   <component name="ProjectViewState">
@@ -21,7 +31,7 @@
     <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
     <property name="android.sdk.path" value="$USER_HOME$/Android/Sdk" />
     <property name="cidr.known.project.marker" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
