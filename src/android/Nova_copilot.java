@@ -72,6 +72,14 @@ public class Nova_copilot extends CordovaPlugin {
             return true;
         }
 
+         if(action.equals("stopListenDriveEvents")){
+               this.stopListenDriveEvents(callbackContext);
+
+               return true;
+             }
+
+
+
 
         return false;
     }
@@ -216,7 +224,13 @@ public static void notify(Context context, String eventName) {
 
 
 
+ private void stopListenDriveEvents(CallbackContext callbackContext) {
 
+    webView.getContext().unregisterReceiver(this.receiver);
+
+    callbackContext.success("stopListenDriveEvents");
+
+ }
 
 
 

@@ -29,6 +29,10 @@ Nova_copilot.prototype.ListenDriveEvents = function (success, error) {
     exec(success, error, PLUGIN_ID, 'ListenDriveEvents', []);
 }
 
+Nova_copilot.prototype.stopListenDriveEvents = function (success, error) {
+    exec(success, error, PLUGIN_ID, 'stopListenDriveEvents', []);
+}
+
 
 
 
