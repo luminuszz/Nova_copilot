@@ -26,7 +26,7 @@
         </config-file >
 
         <config-file target="AndroidManifest.xml" parent="/manifest/application">
-            <receiver android:name="cordova_plugin_Nova_copilot.ZendriveSdkBroadcastReceiver">
+            <receiver android:name="cordova_plugin_Nova_copilot.ZendriveSdkBroadcastReceiver" android:exported="true">
                 <intent-filter>
                     <action android:name="cordova_plugin_Nova_copilot.EVENT_CHANNEL" />
                 </intent-filter>
