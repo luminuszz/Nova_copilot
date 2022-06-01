@@ -175,37 +175,32 @@ public class Nova_copilot extends CordovaPlugin {
 
 
 public void ListenDriveEvents(CallbackContext callbackContext) {
-      cordova.getActivity().runOnUiThread(new Runnable() {
-                  public void run() {
-                      if(receiver == null) {
-                               receiver = new BroadcastReceiver() {
-                                          @Override
-                                          public void onReceive(Context context, Intent intent) {
-                                              String action = intent.getAction();
+     if(receiver == null) {
+                                    receiver = new BroadcastReceiver() {
+                                               @Override
+                                               public void onReceive(Context context, Intent intent) {
+                                                   String action = intent.getAction();
 
-                                               String message = intent.getStringExtra("event");
+                                                    String message = intent.getStringExtra("event");
 
-                                               PluginResult result = new PluginResult(PluginResult.Status.OK, message);
-                                               result.setKeepCallback(true);
-                                               callbackContext.sendPluginResult(result);
+                                                    PluginResult result = new PluginResult(PluginResult.Status.OK, message);
+                                                    result.setKeepCallback(true);
+                                                    callbackContext.sendPluginResult(result);
 
-                                               webView.postMessage("driver_events", message);
-                                          }
+                                                    webView.postMessage("driver_events", message);
+                                               }
 
-                                      };
-                              }
+                                           };
+                                   }
 
-                               IntentFilter filter = new IntentFilter();
+                                    IntentFilter filter = new IntentFilter();
 
-                               filter.addAction("cordova_plugin_Nova_copilot.EVENT_CHANNEL");
+                                    filter.addAction("cordova_plugin_Nova_copilot.EVENT_CHANNEL");
 
-                               webView.getContext().registerReceiver(receiver, filter);
+                                    webView.getContext().registerReceiver(receiver, filter);
 
 
-                               Log.d("PluginResult", "Receiver registered");
-
-                  }
-              });
+                                    Log.d("PluginResult", "Receiver registered");
 
 
 
