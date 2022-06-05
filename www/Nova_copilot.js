@@ -1,4 +1,5 @@
 var exec = require('cordova/exec');
+var cordova = require('cordova')
 
 var PLUGIN_ID = "Nova_copilot";
 
@@ -15,7 +16,16 @@ Nova_copilot.prototype.isSDKSetup = function (arg0, success, error) {
 }
 
 Nova_copilot.prototype.setUp = function (sdkKey, driver_id, success, error) {
-    exec(success, error, PLUGIN_ID, 'setUp', [sdkKey, driver_id]);
+    function  onSuccessCallback(message) {
+        success(message);
+    }
+
+    exec(
+        onSuccessCallback,
+        error,
+        PLUGIN_ID,
+        'setUp',
+        [sdkKey, driver_id]);
 }
 
 Nova_copilot.prototype.startManualDrive = function (arg0, success, error) {
@@ -45,10 +55,18 @@ Nova_copilot.install = function () {
     window.plugins = {};
 
   }
-  cordova.fireDocumentEvent("driver_events")
-
-
   window.plugins.Nova_copilot = new Nova_copilot();
+
+  window.plugins.Nova_copilot.ListenDriveEvents(function (message) {
+      alert(message);
+
+    if(message) {
+        cordova.fireWindowEvent("driver_events", {message: message})
+    } else {
+        cordova.fireWindowEvent("driver_events", {message: "No events"})
+    }
+
+  })
 
 
   return window.plugins.Nova_copilot;
