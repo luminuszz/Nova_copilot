@@ -56,6 +56,18 @@ Nova_copilot.install = function () {
 
   }
   window.plugins.Nova_copilot = new Nova_copilot();
+    
+    
+  window.plugins.Nova_copilot.ListenDriveEvents(function (message) {
+    if(message !== undefined) {
+        cordova.fireWindowEvent("driver_events", {message: message})
+    } else {
+        cordova.fireWindowEvent("driver_events", {message: "No events"})
+    }
+
+  })
+    
+    
   return window.plugins.Nova_copilot;
 };
     
