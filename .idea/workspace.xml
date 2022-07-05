@@ -6,10 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="136345b8-00b0-480a-821a-a780683d332e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/android/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/android/Constants.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/android/Nova_copilot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/android/Nova_copilot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/android/ZendriveSdkBroadcastReceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/android/ZendriveSdkBroadcastReceiver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/src/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/Nova_copilot.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/Nova_copilot.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

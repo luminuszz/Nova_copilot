@@ -28,17 +28,15 @@ public class Nova_copilot extends CordovaPlugin {
 
 
 
+
+
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
 
      this.zendriveCallbackContext = callbackContext;
 
 
-        if (action.equals("coolMethod")) {
-            String message = args.getString(0);
-            this.coolMethod(message, callbackContext);
-            return true;
-        }
+
 
 
         if (action.equals("isSDKSetup")) {
@@ -84,13 +82,7 @@ public class Nova_copilot extends CordovaPlugin {
         return false;
     }
 
-    private void coolMethod(String message, CallbackContext callbackContext) {
-        if (message != null && message.length() > 0) {
-            callbackContext.success(message);
-        } else {
-            callbackContext.error("Expected one non-empty string argument.");
-        }
-    }
+
 
 
     public void isSDKSetup(CallbackContext callbackContext) {
@@ -188,6 +180,9 @@ public void ListenDriveEvents(CallbackContext callbackContext) {
                                                     callbackContext.sendPluginResult(result);
 
                                                     webView.postMessage("driver_events", message);
+
+
+
                                                }
 
                                            };
@@ -212,8 +207,12 @@ public static void notify(Context context, String eventName) {
     intent.putExtra("event", eventName);
     context.sendBroadcast(intent);
 
+     Log.d("Notify driver Event", eventName);
 
-      Log.d("Notify driver Event", eventName);
+     NotifyJs notifyManager = new NotifyJs();
+
+      notifyManager.createNotificationChannel(context);
+      notifyManager.sendNotification(context, eventName);
 }
 
 

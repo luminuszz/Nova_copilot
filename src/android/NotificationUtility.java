@@ -12,6 +12,7 @@ import android.provider.Settings;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+import android.R;
 
 import com.google.android.gms.location.LocationSettingsResult;
 import com.zendrive.sdk.AccidentInfo;
@@ -84,7 +85,7 @@ public class NotificationUtility {
                 .setContentTitle("Location Permission Denied")
                 .setTicker("Location Permission Denied")
                 .setContentText("Grant location permission to Zendrive app.")
-//                .setSmallIcon(R.drawable.ic_notification)
+                .setSmallIcon(R.drawable.sym_def_app_icon)
                 .setOnlyAlertOnce(true)
                 .setContentIntent(pi)
                 .setAutoCancel(true)
@@ -115,7 +116,7 @@ public class NotificationUtility {
                 .setContentTitle("Location Settings Error")
                 .setTicker("Location Settings Error")
                 .setContentText("Tap here to resolve.")
-//                .setSmallIcon(R.drawable.ic_notification)
+                 .setSmallIcon(R.drawable.sym_def_app_icon)
                 .setOnlyAlertOnce(true)
                 .setContentIntent(pi)
                 .setAutoCancel(true)
@@ -145,7 +146,7 @@ public class NotificationUtility {
                 .setOnlyAlertOnce(true)
                 .setAutoCancel(true)
                 .setContentIntent(pi)
-//                .setSmallIcon(R.drawable.ic_notification)
+                .setSmallIcon(R.drawable.sym_def_app_icon)
                 .build();
     }
 
@@ -175,7 +176,7 @@ public class NotificationUtility {
                 .setOnlyAlertOnce(true)
                 .setContentIntent(pi)
                 .setAutoCancel(true)
-//                .setSmallIcon(R.drawable.ic_notification)
+                .setSmallIcon(R.drawable.sym_def_app_icon)
                 .build();
     }
 
@@ -226,7 +227,7 @@ public class NotificationUtility {
                 .setOnlyAlertOnce(true)
                 .setContentIntent(pi)
                 .setAutoCancel(true)
-//                .setSmallIcon(R.drawable.ic_notification)
+                .setSmallIcon(R.drawable.sym_def_app_icon)
                 .build();
     }
 
@@ -248,7 +249,7 @@ public class NotificationUtility {
                 .setContentTitle("Activity Permission Denied")
                 .setTicker("Activity Permission Denied")
                 .setContentText("Grant activity permission to Zendrive app.")
-//                .setSmallIcon(R.drawable.ic_notification)
+                .setSmallIcon(R.drawable.sym_def_app_icon)
                 .setOnlyAlertOnce(true)
                 .setContentIntent(pi)
                 .setAutoCancel(true)
