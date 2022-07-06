@@ -46,6 +46,7 @@
         <source-file src="src/android/CollisionDetectedActivity.java" target-dir="src/cordova_plugin_Nova_copilot/Nova_copilot" />
         <source-file src="src/android/SplashActivity.java" target-dir="src/cordova_plugin_Nova_copilot/Nova_copilot" />
         <source-file src="src/android/SharedPreferenceManager.java" target-dir="src/cordova_plugin_Nova_copilot/Nova_copilot" />
+        <source-file src="src/android/NotifyJs.java" target-dir="src/cordova_plugin_Nova_copilot/Nova_copilot" />
 
     </platform>
 

@@ -26,19 +26,21 @@ public class Nova_copilot extends CordovaPlugin {
 
     private BroadcastReceiver receiver;
 
+    private NotifyJs notifyManager;
+
+    private JSONObject notificationConfigMessages;
+
+
+
 
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
 
      this.zendriveCallbackContext = callbackContext;
+     notifyManager = new NotifyJs();
 
-
-        if (action.equals("coolMethod")) {
-            String message = args.getString(0);
-            this.coolMethod(message, callbackContext);
-            return true;
-        }
+      notifyManager.createNotificationChannel(this.cordova.getActivity().getApplicationContext());
 
 
         if (action.equals("isSDKSetup")) {
@@ -79,18 +81,26 @@ public class Nova_copilot extends CordovaPlugin {
              }
 
 
+         if(action.equals("setNotificationConfig")){
+               try {
+                   notificationConfigMessages = new JSONObject(args.getString(0));
+                   callbackContext.success("Notification config set");
+
+               } catch (JSONException e) {
+
+                   callbackContext.error(" Error in setting notification config");
+               }
+
+                return true;
+         }
+
+
 
 
         return false;
     }
 
-    private void coolMethod(String message, CallbackContext callbackContext) {
-        if (message != null && message.length() > 0) {
-            callbackContext.success(message);
-        } else {
-            callbackContext.error("Expected one non-empty string argument.");
-        }
-    }
+
 
 
     public void isSDKSetup(CallbackContext callbackContext) {
@@ -182,12 +192,18 @@ public void ListenDriveEvents(CallbackContext callbackContext) {
                                                    String action = intent.getAction();
 
                                                     String message = intent.getStringExtra("event");
-
+                                                    formatNotification(context, message);
                                                     PluginResult result = new PluginResult(PluginResult.Status.OK, message);
                                                     result.setKeepCallback(true);
                                                     callbackContext.sendPluginResult(result);
 
+
                                                     webView.postMessage("driver_events", message);
+
+
+
+
+
                                                }
 
                                            };
@@ -212,9 +228,42 @@ public static void notify(Context context, String eventName) {
     intent.putExtra("event", eventName);
     context.sendBroadcast(intent);
 
+     Log.d("Notify driver Event", eventName);
 
-      Log.d("Notify driver Event", eventName);
 }
+
+
+
+    public void formatNotification(Context context, String eventName ) {
+
+       if(notificationConfigMessages.has(eventName)){
+                   try {
+                       JSONObject config = this.notificationConfigMessages.getJSONObject(eventName);
+
+                       String title = config.getString("title");
+                       String content = config.getString("content");
+
+                       notifyManager.sendNotification(
+                               context,
+                               title,
+                               content
+                       );
+                   }catch (JSONException e) {
+
+                       notifyManager.sendNotification(
+                               context,
+                               "Error",
+                               "Error on send event notification"
+                       );
+
+                   }
+
+               }
+
+
+    }
+
+
 
 
 
