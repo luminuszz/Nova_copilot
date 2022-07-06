@@ -26,6 +26,10 @@ public class Nova_copilot extends CordovaPlugin {
 
     private BroadcastReceiver receiver;
 
+    private NotifyJs notifyManager;
+
+    private JSONObject notificationConfigMessages;
+
 
 
 
@@ -34,9 +38,9 @@ public class Nova_copilot extends CordovaPlugin {
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
 
      this.zendriveCallbackContext = callbackContext;
+     notifyManager = new NotifyJs();
 
-
-
+      notifyManager.createNotificationChannel(this.cordova.getActivity().getApplicationContext());
 
 
         if (action.equals("isSDKSetup")) {
@@ -75,6 +79,20 @@ public class Nova_copilot extends CordovaPlugin {
 
                return true;
              }
+
+
+         if(action.equals("setNotificationConfig")){
+               try {
+                   notificationConfigMessages = new JSONObject(args.getString(0));
+                   callbackContext.success("Notification config set");
+
+               } catch (JSONException e) {
+
+                   callbackContext.error(" Error in setting notification config");
+               }
+
+                return true;
+         }
 
 
 
@@ -178,8 +196,11 @@ public void ListenDriveEvents(CallbackContext callbackContext) {
                                                     PluginResult result = new PluginResult(PluginResult.Status.OK, message);
                                                     result.setKeepCallback(true);
                                                     callbackContext.sendPluginResult(result);
+                                                    formatNotification(context, message);
 
                                                     webView.postMessage("driver_events", message);
+
+
 
 
 
@@ -209,11 +230,40 @@ public static void notify(Context context, String eventName) {
 
      Log.d("Notify driver Event", eventName);
 
-     NotifyJs notifyManager = new NotifyJs();
-
-      notifyManager.createNotificationChannel(context);
-      notifyManager.sendNotification(context, eventName);
 }
+
+
+
+    public void formatNotification(Context context, String eventName ) {
+
+       if(this.notificationConfigMessages.has(eventName)){
+                   try {
+                       JSONObject config = this.notificationConfigMessages.getJSONObject(eventName);
+
+                       String title = config.getString("title");
+                       String content = config.getString("content");
+
+                       notifyManager.sendNotification(
+                               context,
+                               title,
+                               content
+                       );
+                   }catch (JSONException e) {
+
+                       notifyManager.sendNotification(
+                               context,
+                               "Error",
+                               "Error on send event notification"
+                       );
+
+                   }
+
+               }
+
+
+    }
+
+
 
 
 

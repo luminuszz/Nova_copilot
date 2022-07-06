@@ -36,10 +36,10 @@ if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 
 
 
-    public void sendNotification(Context ctx, String message) {
+    public void sendNotification(Context ctx, String title, String message) {
         notificationBuilder = new NotificationCompat.Builder(ctx, CHANNEL_ID)
                 .setSmallIcon(R.drawable.sym_def_app_icon)
-                .setContentTitle("Nova copilot")
+                .setContentTitle(title)
                 .setContentText(message)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setAutoCancel(true);
@@ -51,8 +51,6 @@ if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 
 
     }
-
-
 
 
 

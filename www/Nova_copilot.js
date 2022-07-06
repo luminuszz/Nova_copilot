@@ -4,13 +4,14 @@ var cordova = require('cordova')
 
 var PLUGIN_ID = "Nova_copilot";
 
+var currentEvent = ""
+
 function Nova_copilot() {
 }
 
 
-Nova_copilot.prototype.coolMethod = function(arg0, success, error) {
-    exec(success, error, PLUGIN_ID, 'coolMethod', [arg0]);
-}
+
+
 
 Nova_copilot.prototype.isSDKSetup = function(arg0, success, error) {
     exec(success, error, PLUGIN_ID, 'isSDKSetup', [arg0]);
@@ -44,6 +45,40 @@ Nova_copilot.prototype.stopListenDriveEvents = function(success, error) {
     exec(success, error, PLUGIN_ID, 'stopListenDriveEvents', []);
 }
 
+Nova_copilot.prototype.setNotificationConfig = function(config, success, error) {
+
+        var defaultConfig = {
+            onDriveStart:  {
+                title: "Drive started",
+                content: "You already started a drive",
+            },
+            onDriveResume:  {
+                title: "Drive started",
+                content: "You already started a drive",
+            },
+            onDriveEnd:  {
+                title: "Drive started",
+                content: "You already stop a drive",
+            },
+
+            onDriveAnalyzed: {
+                    title: 'Viagem analisada',
+                    content: 'Sua viagem está sendo analisada',
+            },
+            onAccident: {
+                title: 'Acidente detectado',
+                content: 'Acidente detectado',
+            },
+            onZendriveSettingsConfigChanged: {
+                title: 'Mudança de configuração',
+                content: 'Acidente detectado',
+            }
+        }
+
+    exec(success, error, PLUGIN_ID, 'setNotificationConfig', [JSON.stringify(defaultConfig)]);
+
+}
+
 Nova_copilot.install = function() {
     if (!window.plugins) {
         window.plugins = {};
@@ -56,6 +91,11 @@ Nova_copilot.install = function() {
         function(message) {
         if (message !== undefined) {
             cordova.fireWindowEvent("driver_events", { message: message })
+
+            currentEvent = message
+
+
+
         } else {
             cordova.fireWindowEvent("driver_events", { message: "No events" })
         }
@@ -65,5 +105,12 @@ Nova_copilot.install = function() {
 
     return window.plugins.Nova_copilot;
 };
+
+Nova_copilot.getEvent = function() {
+    return currentEvent
+
+}
+
+
 
 cordova.addConstructor(Nova_copilot.install);
