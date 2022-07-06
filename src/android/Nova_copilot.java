@@ -192,11 +192,11 @@ public void ListenDriveEvents(CallbackContext callbackContext) {
                                                    String action = intent.getAction();
 
                                                     String message = intent.getStringExtra("event");
-
+                                                    formatNotification(context, message);
                                                     PluginResult result = new PluginResult(PluginResult.Status.OK, message);
                                                     result.setKeepCallback(true);
                                                     callbackContext.sendPluginResult(result);
-                                                    formatNotification(context, message);
+
 
                                                     webView.postMessage("driver_events", message);
 
@@ -236,7 +236,7 @@ public static void notify(Context context, String eventName) {
 
     public void formatNotification(Context context, String eventName ) {
 
-       if(this.notificationConfigMessages.has(eventName)){
+       if(notificationConfigMessages.has(eventName)){
                    try {
                        JSONObject config = this.notificationConfigMessages.getJSONObject(eventName);
 

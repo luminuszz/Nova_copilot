@@ -75,7 +75,7 @@ Nova_copilot.prototype.setNotificationConfig = function(config, success, error) 
             }
         }
 
-    exec(success, error, PLUGIN_ID, 'setNotificationConfig', [JSON.stringify(defaultConfig)]);
+    exec(success, error, PLUGIN_ID, 'setNotificationConfig', [JSON.stringify(config)]);
 
 }
 

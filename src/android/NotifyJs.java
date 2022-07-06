@@ -16,6 +16,8 @@ public class NotifyJs {
 
     public String CHANNEL_ID = "nova_copilot_events";
 
+    private int id = 1;
+
 
 
 
@@ -41,13 +43,15 @@ if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 .setSmallIcon(R.drawable.sym_def_app_icon)
                 .setContentTitle(title)
                 .setContentText(message)
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setAutoCancel(true);
 
 
             NotificationManagerCompat notificationManager = NotificationManagerCompat.from(ctx);
 
-            notificationManager.notify(5, notificationBuilder.build());
+            notificationManager.notify(id, notificationBuilder.build());
+
+            id = id + 1;
 
 
     }
